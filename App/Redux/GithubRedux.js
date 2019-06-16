@@ -1,52 +1,34 @@
-import { createReducer, createActions } from 'reduxsauce'
-import Immutable from 'seamless-immutable'
-
-/* ------------- Types and Action Creators ------------- */
-
-const { Types, Creators } = createActions({
-  userRequest: ['username'],
-  userSuccess: ['avatar'],
-  userFailure: null
-})
-
-export const GithubTypes = Types
-export default Creators
-
-/* ------------- Initial State ------------- */
+import Immutable from 'seamless-immutable';
+import { createSlice } from 'redux-starter-kit';
 
 export const INITIAL_STATE = Immutable({
   avatar: null,
   fetching: null,
   error: null,
-  username: null
-})
+  username: null,
+});
 
-/* ------------- Selectors ------------- */
+const githubSlice = createSlice({
+  initialState: INITIAL_STATE,
+  reducers: {
+    fetchUserRequest: (state, { username }) => {
+      return state.merge({ fetching: true, username, avatar: null });
+    },
+    fetchUserSuccess: (state, { avatar }) => {
+      return state.merge({ fetching: false, error: null, avatar });
+    },
+    fetchUserFailure: state => {
+      return state.merge({ fetching: false, error: true, avatar: null });
+    },
+  },
+});
 
 export const GithubSelectors = {
-  selectAvatar: state => state.github.avatar
-}
+  selectAvatar: state => state.github.avatar,
+};
 
-/* ------------- Reducers ------------- */
+const { actions, reducer } = githubSlice;
 
-// request the avatar for a user
-export const request = (state, { username }) =>
-  state.merge({ fetching: true, username, avatar: null })
+export const GithubActions = actions;
 
-// successful avatar lookup
-export const success = (state, action) => {
-  const { avatar } = action
-  return state.merge({ fetching: false, error: null, avatar })
-}
-
-// failed to get the avatar
-export const failure = (state) =>
-  state.merge({ fetching: false, error: true, avatar: null })
-
-/* ------------- Hookup Reducers To Types ------------- */
-
-export const reducer = createReducer(INITIAL_STATE, {
-  [Types.USER_REQUEST]: request,
-  [Types.USER_SUCCESS]: success,
-  [Types.USER_FAILURE]: failure
-})
+export default reducer;
