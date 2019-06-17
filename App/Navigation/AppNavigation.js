@@ -17,7 +17,7 @@ const PrimaryNav = createStackNavigator({
     navigationOptions: {
       headerStyle: styles.header,
     },
-  }
+  },
 );
 
 export default createAppContainer(PrimaryNav);
