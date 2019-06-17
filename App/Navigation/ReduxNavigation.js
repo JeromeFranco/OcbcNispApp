@@ -1,17 +1,11 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import { BackHandler, Platform } from 'react-native';
-import {
-  createReactNavigationReduxMiddleware,
-  reduxifyNavigator,
-} from 'react-navigation-redux-helpers';
+import { createReactNavigationReduxMiddleware, reduxifyNavigator } from 'react-navigation-redux-helpers';
 import { connect } from 'react-redux';
 import AppNavigation from './AppNavigation';
 
-export const appNavigatorMiddleware = createReactNavigationReduxMiddleware(
-  'root',
-  state => state.nav
-);
+export const appNavigatorMiddleware = createReactNavigationReduxMiddleware('root', state => state.nav);
 
 const ReduxAppNavigator = reduxifyNavigator(AppNavigation, 'root');
 

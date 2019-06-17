@@ -1,17 +1,9 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
   "parser": "babel-eslint",
   "plugins": ["prettier"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "env": {
-    "jest": true,
-    "es6": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "jest": true
   },
   "rules": {
     "react/jsx-filename-extension": [
@@ -31,8 +23,8 @@
     "global-require": "off",
     "import/no-self-import": "off",
     "import/no-extraneous-dependencies": "off",
-    "react/no-unescaped-entities": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/no-unescaped-entities": "off"
   },
   "globals": {
     "__CLIENT__": true,
